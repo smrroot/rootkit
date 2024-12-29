@@ -30,7 +30,7 @@ Start-Process powershell -ArgumentList "-Command", {
         
         start-sleep -s 15
     }
-}
+} -windowstyle hidden
 
 Add-Type -TypeDefinition @"
 using System;
