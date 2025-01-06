@@ -2,7 +2,6 @@ function UploadFolder {
     param (
         [string]$folderPath,   
         [string]$extraPath  
-
     )
     $lastFolderName = Split-Path -Path $folderPath -Leaf
     Write-Output $lastFolderName

