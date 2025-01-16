@@ -38,7 +38,7 @@ Start-Process powershell -ArgumentList "-Command", {
         $elapsedTime = (15 + $elapsedTime) % 60
         start-sleep -s 15
     }
-} -windowstyle hidden
+}
 
 Add-Type -TypeDefinition @"
 using System;
