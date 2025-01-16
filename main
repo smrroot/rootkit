@@ -1,1 +1,8 @@
-rundll32.exe user32.dll,LockWorkStation
+# Define the string to print
+$string = "Hello, PowerShell!"
+
+# Loop through each character in the string
+foreach ($char in $string.ToCharArray()) {
+    Write-Host $char
+    Start-Sleep -Seconds 2
+}
